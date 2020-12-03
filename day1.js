@@ -48,4 +48,4 @@ function driver(exercise, readFile, output) {
     output("" + exercise(input));
 }
 exports.driver = driver;
-driver(ex1core, function () { return "" + fs.readFileSync("ex1.txt"); }, function (s) { return console.log(s); });
+driver(ex2core, function () { return "" + fs.readFileSync("ex1.txt"); }, function (s) { return console.log(s); });

@@ -32,7 +32,7 @@ export function driver(
 }
 
 driver(
-  ex1core,
+  ex2core,
   () => "" + fs.readFileSync("ex1.txt"),
   (s) => console.log(s)
 );
