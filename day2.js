@@ -34,7 +34,7 @@ function xor(a, b) {
     return (a && !b) || (!a && b);
 }
 function isValidExercise2(conf) {
-    return xor(conf.password.charAt(conf.policy.min) === conf.policy.char, conf.password.charAt(conf.policy.max) === conf.policy.char);
+    return xor(conf.password.charAt(conf.policy.min - 1) === conf.policy.char, conf.password.charAt(conf.policy.max - 1) === conf.policy.char);
 }
 function core(validator, input) {
     var valid = 0;
@@ -61,10 +61,10 @@ function parse(line) {
         password: parts[1],
     };
 }
-function driver(readFile, output) {
+function driver(validator, readFile, output) {
     var content = readFile();
     var input = content.split("\n").map(parse);
-    output("" + core(isValidExercise1, input));
+    output("" + core(validator, input));
 }
 exports.driver = driver;
-driver(function () { return "" + fs.readFileSync("ex2.txt"); }, function (s) { return console.log(s); });
+driver(isValidExercise2, function () { return "" + fs.readFileSync("ex2.txt"); }, function (s) { return console.log(s); });

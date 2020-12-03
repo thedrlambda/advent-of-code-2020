@@ -21,8 +21,8 @@ function xor(a: boolean, b: boolean) {
 
 function isValidExercise2(conf: Config) {
   return xor(
-    conf.password.charAt(conf.policy.min) === conf.policy.char,
-    conf.password.charAt(conf.policy.max) === conf.policy.char
+    conf.password.charAt(conf.policy.min - 1) === conf.policy.char,
+    conf.password.charAt(conf.policy.max - 1) === conf.policy.char
   );
 }
 
@@ -51,13 +51,18 @@ function parse(line: string) {
   };
 }
 
-export function driver(readFile: () => string, output: (_: string) => void) {
+export function driver(
+  validator: (_: Config) => boolean,
+  readFile: () => string,
+  output: (_: string) => void
+) {
   let content = readFile();
   let input = content.split("\n").map(parse);
-  output("" + core(isValidExercise1, input));
+  output("" + core(validator, input));
 }
 
 driver(
+  isValidExercise2,
   () => "" + fs.readFileSync("ex2.txt"),
   (s) => console.log(s)
 );
