@@ -19,7 +19,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ex1 = exports.ex2core = exports.ex1core = void 0;
+exports.driver = exports.ex2core = exports.ex1core = void 0;
 var fs = __importStar(require("fs"));
 function ex1core(input) {
     for (var i = 0; i < input.length - 1; i++)
@@ -30,6 +30,8 @@ function ex1core(input) {
     return 514579;
 }
 exports.ex1core = ex1core;
+//  i  j  k
+// [1, 2, 3]
 function ex2core(input) {
     for (var i = 0; i < input.length - 2; i++)
         for (var j = i + 1; j < input.length - 1; j++)
@@ -40,10 +42,10 @@ function ex2core(input) {
     return 514579;
 }
 exports.ex2core = ex2core;
-function ex1(readFile, output) {
+function driver(exercise, readFile, output) {
     var content = readFile();
     var input = content.split("\n").map(function (x) { return +x.trim(); });
-    output("" + ex1core(input));
+    output("" + exercise(input));
 }
-exports.ex1 = ex1;
-ex1(function () { return "" + fs.readFileSync("ex1.txt"); }, function (s) { return console.log(s); });
+exports.driver = driver;
+driver(ex1core, function () { return "" + fs.readFileSync("ex1.txt"); }, function (s) { return console.log(s); });

@@ -1,4 +1,4 @@
-import { ex1, ex1core, ex2core } from "../day1";
+import { driver, ex1core, ex2core } from "../day1";
 
 describe("Exercise 1 core", () => {
   it("works for given example", () => {
@@ -19,8 +19,18 @@ describe("Exercise 1", () => {
     let input = () => "1721\n979\n366\n299\n675\n1456";
     let out = "";
     let output = (s: string) => (out += s);
-    ex1(input, output);
+    driver(ex1core, input, output);
     expect(out).toBe("514579");
+  });
+});
+
+describe("Exercise 2", () => {
+  it("works for given example", () => {
+    let input = () => "1721\n979\n366\n299\n675\n1456";
+    let out = "";
+    let output = (s: string) => (out += s);
+    driver(ex2core, input, output);
+    expect(out).toBe("241861950");
   });
 });
 
