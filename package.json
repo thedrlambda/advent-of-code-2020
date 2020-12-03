@@ -8,5 +8,11 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "jasmine": "^3.6.3"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^3.6.2"
+  }
 }
