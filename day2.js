@@ -19,9 +19,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.driver = exports.ex1core = void 0;
+exports.driver = exports.ex2 = exports.ex1 = void 0;
 var fs = __importStar(require("fs"));
-function isValid(conf) {
+function isValidExercise1(conf) {
     var count = 0;
     for (var i = 0; i < conf.password.length; i++) {
         if (conf.password.charAt(i) === conf.policy.char) {
@@ -30,15 +30,28 @@ function isValid(conf) {
     }
     return conf.policy.min <= count && count <= conf.policy.max;
 }
-function ex1core(input) {
+function xor(a, b) {
+    return (a && !b) || (!a && b);
+}
+function isValidExercise2(conf) {
+    return xor(conf.password.charAt(conf.policy.min) === conf.policy.char, conf.password.charAt(conf.policy.max) === conf.policy.char);
+}
+function core(validator, input) {
     var valid = 0;
     for (var i = 0; i < input.length; i++)
-        if (isValid(input[i])) {
+        if (validator(input[i])) {
             valid++;
         }
     return valid;
 }
-exports.ex1core = ex1core;
+function ex1(input) {
+    return core(isValidExercise1, input);
+}
+exports.ex1 = ex1;
+function ex2(input) {
+    return core(isValidExercise2, input);
+}
+exports.ex2 = ex2;
 function parse(line) {
     var parts = line.split(": ");
     var policyParts = parts[0].split(" ");
@@ -51,7 +64,7 @@ function parse(line) {
 function driver(readFile, output) {
     var content = readFile();
     var input = content.split("\n").map(parse);
-    output("" + ex1core(input));
+    output("" + core(isValidExercise1, input));
 }
 exports.driver = driver;
 driver(function () { return "" + fs.readFileSync("ex2.txt"); }, function (s) { return console.log(s); });
