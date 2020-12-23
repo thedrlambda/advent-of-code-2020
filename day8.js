@@ -101,4 +101,5 @@ function flip(prog, pos) {
     else
         prog[pos] = "nop" + prog[pos].substring(3);
 }
-console.log(ex2());
+ex1();
+// console.log(ex2());
